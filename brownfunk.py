@@ -10,7 +10,7 @@
 
 # timer
 import time
-
+import shutil
 
 def timer(state="S"):
     global startTimer
@@ -108,3 +108,24 @@ def groupBy(nestedList):
         store.append([groups_un[i], sums[i]])
 
     return store
+
+
+
+
+
+def renameFileRecursion(fileIn):
+    counter = 1
+    while os.path.exists(fileIn):
+        file, extention = os.path.splitext(fileIn)
+        if counter > 1:
+            file = file[0:len(file)-2]
+        fileIn = file +'_' + str(counter) + extention
+        counter = counter + 1
+    return fileIn
+
+
+def moveFile(fileFrom, fileTo):
+    # rename if needed
+    fileTo = renameFileRecursion(fileTo)
+    # move
+    shutil.move(fileFrom, fileTo)a
